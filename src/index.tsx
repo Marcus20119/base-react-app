@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store/store';
 
 import './scss/index.scss';
+import RootModal from './components/modal/RootModal';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,7 +16,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.Fragment>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+        <RootModal />
+      </BrowserRouter>
     </Provider>
   </React.Fragment>
 );

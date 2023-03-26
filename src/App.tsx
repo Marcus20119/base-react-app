@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from 'react';
+import { lazy } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout';
+
+import LoadingPage from './pages/LoadingPage';
+import NotFoundPage from './pages/NotFoundPage';
+
+const TestPage = lazy(() => import('./pages/TestPage'));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<LoadingPage />}>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route path="" element={<Navigate replace to="/latest" />} />
+          <Route path="test" element={<TestPage />} />
+        </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Suspense>
   );
 }
 

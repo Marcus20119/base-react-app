@@ -18,7 +18,6 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <App />
-        <RootModal />
       </BrowserRouter>
     </Provider>
   </React.Fragment>
